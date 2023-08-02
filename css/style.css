@@ -1,0 +1,319 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  /* переменная --side-lenght задается через JS */
+  --cell-size: calc(72svmin / var(--side-length));
+  --cell-gap: calc(3svmin / (var(--side-length) - 1));
+
+  --tile-2-bgColor: #eee4da;
+  --tile-2-color: #242221;
+  --tile-4-bgColor: #ede0c8;
+  --tile-4-color: #242221;
+  --tile-8-bgColor: #f2b179;
+  --tile-8-color: #242221;
+  --tile-16-bgColor: #f59563;
+  --tile-16-color: #242221;
+  --tile-32-bgColor: #f67c5f;
+  --tile-32-color: #242221;
+  --tile-64-bgColor: #f65e3b;
+  --tile-64-color: #f9f6f2;
+  --tile-128-bgColor: #edcf72;
+  --tile-128-color: #242221;
+  --tile-256-bgColor: #edcc61;
+  --tile-256-color: #242221;
+  --tile-512-bgColor: #edc850;
+  --tile-512-color: #f9f6f2;
+  --tile-1024-bgColor: #edc53f;
+  --tile-1024-color: #f9f6f2;
+  --tile-2048-bgColor: #edc22e;
+  --tile-2048-color: #f9f6f2;
+  --tile-super-bgColor: #3c3a32;
+  --tile-super-color: #f9f6f2;
+}
+
+body{
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+}
+
+.game-wrapper{
+  display: none; /* для deferred загрузки после создания всех ячеек через js*/
+  flex-direction: column;
+  gap: 4svmin
+}
+
+.game-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--side-length), var(--cell-size));
+  grid-template-rows: repeat(var(--side-length), var(--cell-size));
+  gap: var(--cell-gap);
+}
+
+.cell {
+  background-color: #444;
+  border-radius: 1svmin;
+
+  animation: cellApperance 200ms;
+  -webkit-animation: cellApperance 200ms;
+  -moz-animation: cellApperance 200ms;
+  -o-animation: cellApperance 200ms;
+}
+
+@keyframes cellApperance {
+  0% {
+    transform: scale(0.95);
+  }
+}
+
+.tile {
+  position: absolute;
+  top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)));
+  left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--cell-size);
+  width: var(--cell-size);
+  border-radius: 1svmin;
+  font-family: sans-serif;
+  font-size: calc(var(--cell-size) / 4);
+  font-weight: bold;
+  color: oklch(var(--text-lightness) 0 0);
+  transition: 100ms;
+
+  animation: tileApperance 200ms;
+  -webkit-animation: tileApperance 200ms;
+  -moz-animation: tileApperance 200ms;
+  -o-animation: tileApperance 200ms;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+@keyframes tileApperance {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+}
+
+.tile-2 {
+  background-color: var(--tile-2-bgColor);
+  color: var(--tile-2-color)
+}
+.tile-4 {
+  background-color: var(--tile-4-bgColor);
+  color: var(--tile-4-color)
+}
+.tile-8 {
+  background-color: var(--tile-8-bgColor);
+  color: var(--tile-8-color)
+}
+.tile-16 {
+  background-color: var(--tile-16-bgColor);
+  color: var(--tile-16-color)
+}
+.tile-32 {
+  background-color: var(--tile-32-bgColor);
+  color: var(--tile-32-color)
+}
+.tile-64 {
+  background-color: var(--tile-64-bgColor);
+  color: var(--tile-64-color)
+}
+.tile-128 {
+  background-color: var(--tile-128-bgColor);
+  color: var(--tile-128-color)
+}
+.tile-256 {
+  background-color: var(--tile-256-bgColor);
+  color: var(--tile-256-color)
+}
+.tile-512 {
+  background-color: var(--tile-512-bgColor);
+  color: var(--tile-512-color)
+}
+.tile-1024 {
+  background-color: var(--tile-1024-bgColor);
+  color: var(--tile-1024-color)
+}
+.tile-2048 {
+  background-color: var(--tile-2048-bgColor);
+  color: var(--tile-2048-color)
+}
+.tile-super {
+  background-color: var(--tile-super-bgColor);
+  color: var(--tile-super-color)
+}
+
+.bottom-panel {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  gap: 5svmin;
+  align-items: center;
+  padding: 1svmin 2svmin;
+  font-size: 3.5svmin;
+  font-family: sans-serif;
+  background-color: #444;
+  border-radius: 1svmin;
+  color: #fff;
+}
+
+.game-score-wrapper{
+  margin-right: auto;
+}
+
+.restart{
+  padding: 1svmin 3svmin;
+  border: 0.5svmin solid #000;
+  border-radius: 1svmin;
+  background-color: #c8c8c8;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.settings{
+  fill: #c8c8c8;
+  height: 4.5svmin;
+  cursor: pointer;
+  transition: 300ms
+}
+
+.settings-menu{
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  align-self: start;
+  transform: translateY(calc(-100%  - 3svmin));
+  padding: 3svmin 5svmin;
+  border: 0.7svmin solid #c8c8c8;
+  border-radius: 1svmin;
+  background-color: #333;
+  transition: 300ms;
+}
+
+.settings-menu--open{
+  visibility: visible;
+  opacity: 1;
+}
+
+.settings-close{
+  position: absolute;
+  height: 4.5svmin;
+  width: 4.5svmin;
+  top: 2svmin;
+  right: 2svmin;
+  fill: #c8c8c8;
+  cursor: pointer;
+}
+
+.settings-title{
+  font-size: 5svmin;
+  margin-bottom: 2svmin;
+}
+
+.settings-game-field{
+  margin-bottom: 3svmin;
+}
+
+.settings-game-field-option {
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+  font-size: 4.5svmin;
+  margin-bottom: 1svmin;
+}
+
+.settings-option:last-child {
+  margin-bottom: 0;
+}
+
+.settings-game-field-choice{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 4svmin;
+  width: 4svmin;
+  padding: 0.5svmin;
+  border: 0.3svmin solid #fff;
+  margin-right: 1.5svmin;
+  border-radius: 50%;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.settings-game-field-choice:checked {
+  background: #fff;
+  background-clip: content-box;
+}
+
+.settings-color-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 3svmin;
+}
+.settings-color-choice{
+  position: relative;
+  height: 9svmin;
+  width: 9svmin;
+  padding: 0.5svmin;
+  background-clip: content-box;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+.settings-color-choice--selected{
+  border: 0.5svmin solid #fff;
+}
+
+.settings-color-choice::after{
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  padding: inherit;
+  padding-bottom: 0;
+  border-radius: 50% 50% 0 0/ 100% 100% 0 0;
+  background-clip: content-box;
+  background-color: #fff;
+}
+
+.settings-color-choice--classic{
+  background-color: #f59563
+}
+.settings-color-choice--classic::after {
+  background-color: #edc22e;
+}
+
+.settings-color-choice--bluish {
+  background-color: oklch(84% 0.17 291)
+}
+.settings-color-choice--bluish::after {
+  background-color: oklch(36% 0.17 291)
+}
+
+.settings-color-choice--greenly {
+  background-color: oklch(84% 0.13 144)
+}
+.settings-color-choice--greenly::after {
+  background-color: oklch(36% 0.13 144)
+}

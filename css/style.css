@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-:root{
+:root {
   /* переменная --side-lenght задается через JS */
   --cell-size: calc(72svmin / var(--side-length));
   --cell-gap: calc(3svmin / (var(--side-length) - 1));
@@ -35,18 +35,20 @@
   --tile-super-color: #f9f6f2;
 }
 
-body{
+body {
   height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #333;
+  -ms-touch-action: none;
+  touch-action: none;
 }
 
-.game-wrapper{
+.game-wrapper {
   display: none; /* для deferred загрузки после создания всех ячеек через js*/
   flex-direction: column;
-  gap: 4svmin
+  gap: 4svmin;
 }
 
 .game-board {
@@ -109,51 +111,51 @@ body{
 
 .tile-2 {
   background-color: var(--tile-2-bgColor);
-  color: var(--tile-2-color)
+  color: var(--tile-2-color);
 }
 .tile-4 {
   background-color: var(--tile-4-bgColor);
-  color: var(--tile-4-color)
+  color: var(--tile-4-color);
 }
 .tile-8 {
   background-color: var(--tile-8-bgColor);
-  color: var(--tile-8-color)
+  color: var(--tile-8-color);
 }
 .tile-16 {
   background-color: var(--tile-16-bgColor);
-  color: var(--tile-16-color)
+  color: var(--tile-16-color);
 }
 .tile-32 {
   background-color: var(--tile-32-bgColor);
-  color: var(--tile-32-color)
+  color: var(--tile-32-color);
 }
 .tile-64 {
   background-color: var(--tile-64-bgColor);
-  color: var(--tile-64-color)
+  color: var(--tile-64-color);
 }
 .tile-128 {
   background-color: var(--tile-128-bgColor);
-  color: var(--tile-128-color)
+  color: var(--tile-128-color);
 }
 .tile-256 {
   background-color: var(--tile-256-bgColor);
-  color: var(--tile-256-color)
+  color: var(--tile-256-color);
 }
 .tile-512 {
   background-color: var(--tile-512-bgColor);
-  color: var(--tile-512-color)
+  color: var(--tile-512-color);
 }
 .tile-1024 {
   background-color: var(--tile-1024-bgColor);
-  color: var(--tile-1024-color)
+  color: var(--tile-1024-color);
 }
 .tile-2048 {
   background-color: var(--tile-2048-bgColor);
-  color: var(--tile-2048-color)
+  color: var(--tile-2048-color);
 }
 .tile-super {
   background-color: var(--tile-super-bgColor);
-  color: var(--tile-super-color)
+  color: var(--tile-super-color);
 }
 
 .bottom-panel {
@@ -170,11 +172,11 @@ body{
   color: #fff;
 }
 
-.game-score-wrapper{
+.game-score-wrapper {
   margin-right: auto;
 }
 
-.restart{
+.restart {
   padding: 1svmin 3svmin;
   border: 0.5svmin solid #000;
   border-radius: 1svmin;
@@ -187,19 +189,19 @@ body{
   -ms-user-select: none;
 }
 
-.settings{
+.settings {
   fill: #c8c8c8;
   height: 4.5svmin;
   cursor: pointer;
-  transition: 300ms
+  transition: 300ms;
 }
 
-.settings-menu{
+.settings-menu {
   visibility: hidden;
   opacity: 0;
   position: absolute;
   align-self: start;
-  transform: translateY(calc(-100%  - 3svmin));
+  transform: translateY(calc(-100% - 3svmin));
   padding: 3svmin 5svmin;
   border: 0.7svmin solid #c8c8c8;
   border-radius: 1svmin;
@@ -207,12 +209,12 @@ body{
   transition: 300ms;
 }
 
-.settings-menu--open{
+.settings-menu--open {
   visibility: visible;
   opacity: 1;
 }
 
-.settings-close{
+.settings-close {
   position: absolute;
   height: 4.5svmin;
   width: 4.5svmin;
@@ -222,12 +224,12 @@ body{
   cursor: pointer;
 }
 
-.settings-title{
+.settings-title {
   font-size: 5svmin;
   margin-bottom: 2svmin;
 }
 
-.settings-game-field{
+.settings-game-field {
   margin-bottom: 3svmin;
 }
 
@@ -243,7 +245,7 @@ body{
   margin-bottom: 0;
 }
 
-.settings-game-field-choice{
+.settings-game-field-choice {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -268,7 +270,7 @@ body{
   justify-content: center;
   gap: 3svmin;
 }
-.settings-color-choice{
+.settings-color-choice {
   position: relative;
   height: 9svmin;
   width: 9svmin;
@@ -278,11 +280,11 @@ body{
   transform: rotate(45deg);
   cursor: pointer;
 }
-.settings-color-choice--selected{
+.settings-color-choice--selected {
   border: 0.5svmin solid #fff;
 }
 
-.settings-color-choice::after{
+.settings-color-choice::after {
   content: "";
   box-sizing: border-box;
   position: absolute;
@@ -297,23 +299,23 @@ body{
   background-color: #fff;
 }
 
-.settings-color-choice--classic{
-  background-color: #f59563
+.settings-color-choice--classic {
+  background-color: #f59563;
 }
 .settings-color-choice--classic::after {
   background-color: #edc22e;
 }
 
 .settings-color-choice--bluish {
-  background-color: oklch(84% 0.17 291)
+  background-color: oklch(84% 0.17 291);
 }
 .settings-color-choice--bluish::after {
-  background-color: oklch(36% 0.17 291)
+  background-color: oklch(36% 0.17 291);
 }
 
 .settings-color-choice--greenly {
-  background-color: oklch(84% 0.13 144)
+  background-color: oklch(84% 0.13 144);
 }
 .settings-color-choice--greenly::after {
-  background-color: oklch(36% 0.13 144)
+  background-color: oklch(36% 0.13 144);
 }

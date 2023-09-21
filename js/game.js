@@ -3,6 +3,7 @@ import { Tile } from "./tile.js";
 
 const gameBoard = document.querySelector(".game-board");
 const grid = new Grid(gameBoard, 4);
+let hammer;
 
 document.querySelector(".game-wrapper").style.display = "flex";
 document.querySelector(":root").style.setProperty("--side-length", 4);
@@ -14,58 +15,62 @@ function startNewGame() {
   grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
   grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
   setupInputOnce();
+  initTouch();
 }
 
 function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
 }
 
+function initTouch() {
+  document.addEventListener("dblclick", (event) => {
+    event.preventDefault();
+  });
+
+  hammer = new Hammer(document.querySelector(".game-board"));
+  hammer.get("pan").set({ direction: Hammer.DIRECTION_ALL });
+
+  setupTouchOnce();
+}
+
+function setupTouchOnce() {
+  hammer.on("panstart", handleInput);
+}
+
 async function handleInput(e) {
-  switch (e.key) {
-    case "ArrowUp":
-      if (!canMoveUp()) {
-        setupInputOnce();
-        return;
-      }
-      settingsMenu.classList.contains("settings-menu--open") && forsedCloseSettings();
-
-      await moveUp();
-      break;
-
-    case "ArrowDown":
-      if (!canMoveDown()) {
-        setupInputOnce();
-        return;
-      }
-      settingsMenu.classList.contains("settings-menu--open") && forsedCloseSettings();
-
-      await moveDown();
-      break;
-
-    case "ArrowLeft":
-      if (!canMoveLeft()) {
-        setupInputOnce();
-        return;
-      }
-      settingsMenu.classList.contains("settings-menu--open") && forsedCloseSettings();
-
-      await moveLeft();
-      break;
-
-    case "ArrowRight":
-      if (!canMoveRight()) {
-        setupInputOnce();
-        return;
-      }
-      settingsMenu.classList.contains("settings-menu--open") && forsedCloseSettings();
-
-      await moveRight();
-      break;
-
-    default:
+  if (e.key == "ArrowUp" || e.additionalEvent == "panup") {
+    if (!canMoveUp()) {
       setupInputOnce();
       return;
+    }
+    await moveUp();
   }
+
+  if (e.key == "ArrowDown" || e.additionalEvent == "pandown") {
+    if (!canMoveDown()) {
+      setupInputOnce();
+      return;
+    }
+    await moveDown();
+  }
+
+  if (e.key == "ArrowRight" || e.additionalEvent == "panright") {
+    if (!canMoveRight()) {
+      setupInputOnce();
+      return;
+    }
+    await moveRight();
+  }
+
+  if (e.key == "ArrowLeft" || e.additionalEvent == "panleft") {
+    if (!canMoveLeft()) {
+      setupInputOnce();
+      return;
+    }
+    await moveLeft();
+  }
+
+  settingsMenu.classList.contains("settings-menu--open") && forsedCloseSettings();
 
   const newTile = new Tile(gameBoard);
   grid.getRandomEmptyCell().linkTile(newTile);

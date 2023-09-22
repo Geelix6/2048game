@@ -11,7 +11,10 @@
     <div class="game-wrapper">
       <div class="game-board"></div>
       <div class="bottom-panel">
-        <div class="game-score-wrapper">Score: <span class="game-score">0</span></div>
+        <div class="game-score-wrapper">
+          <p>Score: <span class="game-score">0</span></p>
+          <p>Best on this field: <span class="best-game-score">0</span></p>
+        </div>
         <div class="restart">Restart</div>
         <svg class="settings" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path
@@ -31,7 +34,7 @@
               3x3 - Маленькое
             </p>
             <p class="settings-game-field-option">
-              <input class="settings-game-field-choice" type="radio" checked name="game-field-size" value="4" />
+              <input class="settings-game-field-choice" type="radio" name="game-field-size" value="4" />
               4x4 - Обычное
             </p>
             <p class="settings-game-field-option">

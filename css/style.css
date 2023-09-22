@@ -176,6 +176,14 @@ body {
   margin-right: auto;
 }
 
+.game-score-wrapper > p:first-child {
+  margin-bottom: 0.5svmin;
+}
+
+.game-score-wrapper > p:last-child {
+  font-size: 2.8svmin;
+}
+
 .restart {
   padding: 1svmin 3svmin;
   border: 0.5svmin solid #000;

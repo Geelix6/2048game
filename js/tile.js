@@ -1,8 +1,8 @@
 export class Tile {
-  constructor(gridElement) {
+  constructor(gridElement, value) {
     this.tileElement = document.createElement("div");
     this.tileElement.classList.add("tile");
-    this.setValue(Math.random() < 0.75 ? 2 : 4);
+    this.setValue(value ?? (Math.random() < 0.75 ? 2 : 4));
     gridElement.append(this.tileElement);
   }
 

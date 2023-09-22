@@ -1,10 +1,10 @@
 import { Cell } from "./cell.js";
 
 export class Grid {
-  constructor(gridElement, side_length) {
+  constructor(gridElement, sideLength) {
     this.gridElement = gridElement;
-    this.side_length = side_length;
-    this.cells_count = this.side_length ** 2;
+    this.sideLength = sideLength;
+    this.cellsCount = this.sideLength ** 2;
 
     this.createCells(this.gridElement);
     this.createGrouppedCells();
@@ -12,8 +12,8 @@ export class Grid {
 
   createCells(gridElement) {
     this.cells = [];
-    for (let i = 0; i < this.cells_count; i++) {
-      this.cells.push(new Cell(gridElement, i % this.side_length, Math.floor(i / this.side_length)));
+    for (let i = 0; i < this.cellsCount; i++) {
+      this.cells.push(new Cell(gridElement, i % this.sideLength, Math.floor(i / this.sideLength)));
     }
   }
 
@@ -46,9 +46,13 @@ export class Grid {
     return emptyCells[randomIndex];
   }
 
+  getCellByCoords(x, y) {
+    return this.cellsGrouppedByColumn[x][y];
+  }
+
   changeGridSize(newLength) {
-    this.side_length = newLength;
-    this.cells_count = this.side_length ** 2;
+    this.sideLength = newLength;
+    this.cellsCount = this.sideLength ** 2;
     document.querySelector(":root").style.setProperty("--side-length", newLength);
     this.gridElement.innerHTML = "";
     this.createCells(this.gridElement);

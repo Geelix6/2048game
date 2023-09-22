@@ -125,7 +125,7 @@ greenlyColors.palette = {
 };
 
 function changeGameColorsAndSwitcher(e) {
-  rootStyles = document.querySelector(":root").style;
+  const rootStyles = document.querySelector(":root").style;
   rootStyles.setProperty("--tile-2-bgColor", e.currentTarget.palette.tile2BgColor);
   rootStyles.setProperty("--tile-2-color", e.currentTarget.palette.tile2Color);
   rootStyles.setProperty("--tile-4-bgColor", e.currentTarget.palette.tile4BgColor);
@@ -155,4 +155,6 @@ function changeGameColorsAndSwitcher(e) {
     switcher.classList.remove("settings-color-choice--selected");
   });
   this.classList.add("settings-color-choice--selected");
+
+  localStorage.setItem("2048game_colors", this.classList[1]);
 }

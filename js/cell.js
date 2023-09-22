@@ -48,7 +48,17 @@ export class Cell {
   }
 
   changeGameScore() {
-    let gameScore = document.querySelector(".game-score");
+    const gameScore = document.querySelector(".game-score");
     gameScore.textContent = +gameScore.textContent + this.linkedTile.value;
+    localStorage.setItem("2048game_score", gameScore.textContent);
+
+    const bestScore = document.querySelector(".best-game-score");
+    if (+bestScore.textContent < +gameScore.textContent) {
+      bestScore.textContent = gameScore.textContent;
+
+      const sideLength = document.querySelector(":root").style.getPropertyValue("--side-length");
+      const bestScoreOnGameField = `2048game_best-score${sideLength}x${sideLength}`;
+      localStorage.setItem(bestScoreOnGameField, bestScore.textContent);
+    }
   }
 }
